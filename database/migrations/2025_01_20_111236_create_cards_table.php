@@ -12,15 +12,14 @@ return new class extends Migration
      * @return void
      */
     public function up()
-{
-    Schema::create('cards', function (Blueprint $table) {
-        $table->id();
-        $table->string('title'); // Заголовок карточки
-        $table->text('description')->nullable(); // Описание
-        $table->timestamps(); // created_at и updated_at
-    });
-}
-
+    {
+        Schema::create('cards', function (Blueprint $table) {
+            $table->id();
+            $table->text('Title');
+            $table->text('Desc');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

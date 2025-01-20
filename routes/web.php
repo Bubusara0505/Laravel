@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\CardsController;
+
+
+// Route::get('/cards/create', [CardController::class, 'create'])->name('cards.create');
+// Route::get('/cards/{id}/edit', [CardController::class, 'edit'])->name('cards.edit');
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', 'CardsController@index');
+
+
 Route::get('/', function () {
-    return view('welcome');
+    $cards = DB::table('cards')->get();
+    return view('index', compact('cards'));
 });
 
-Route::get('blog', function () {
-    return view('blog');
+Route::get('card', function () {
+    return view('cards.create');
 });
+
+Route::get('/cards', [CardsController::class, 'index'])->name('cards.index');
+Route::post('/cards', [CardsController::class, 'store'])->name('cards.store');
 
